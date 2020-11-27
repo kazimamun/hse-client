@@ -1,0 +1,5 @@
+nav li {
+    list-style: none;
+    float: left;
+    padding-right: 10px;
+}
