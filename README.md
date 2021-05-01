@@ -1,4 +1,4 @@
-git remote add origin https://github.com/kazimamun/hse-server.git git branch -M main git push -u origin main
+git remote add origin https://github.com/kazimamun/hse-client.git git branch -M main git push -u origin main
 
 # Getting Started with Create React App
 
