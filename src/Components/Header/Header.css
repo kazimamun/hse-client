@@ -3,3 +3,9 @@ nav li {
     float: left;
     padding-right: 10px;
 }
+.myLink{
+    color: rgba(255,255,255,.5);
+}
+.myLink:hover{
+    color: #007bff
+}

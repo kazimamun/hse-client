@@ -6,7 +6,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { userContext } from '../../../App';
 
 firebase.initializeApp(firebaseConfig)
-const Login = () => {   
+const Login = ({handleLogOut}) => {   
     const [loggedInUser, setLoggedInUser] = useContext(userContext);
     const history = useHistory();
     const location = useLocation();    
@@ -19,7 +19,8 @@ const Login = () => {
             const {displayName, email} = result.user;
             const signedInUser = {
                 name : displayName,
-                email : email
+                email : email,
+                isLoggedIn : true
             };
             setLoggedInUser(signedInUser); 
             history.replace(from); 
@@ -29,11 +30,13 @@ const Login = () => {
         })
     };
     //sign out
-    const handleLogOut = ()=>{
+    const handleLogOute = ()=>{
         firebase.auth().signOut()
         .then(result=>{
             const user = {
-                email : ''
+                name : '',
+                email: '',
+                isLoggedIn : false
             };
             setLoggedInUser(user);
         })
@@ -45,7 +48,7 @@ const Login = () => {
         <div>
             <h1>this is login page</h1>
             {
-                loggedInUser.email ? <button onClick={handleLogOut}>Log Out</button> :
+                loggedInUser.isLoggedIn ? <button onClick={handleLogOut}>Log Out</button> :
                                     <button onClick={handleGoogleSignIn}>Login with Google</button>
             }
         </div>

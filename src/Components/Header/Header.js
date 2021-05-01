@@ -1,45 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Header.css';
-import { Jumbotron, Button } from 'react-bootstrap';
+import { Jumbotron, Button, Navbar, Nav, FormControl, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { userContext } from '../../App';
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
-const Header = () => {
+const Header = ({handleLogOut}) => {
+	const [loggedInUser] = useContext(userContext);
     return (
-        <div className="header">
-			<div class="clear"></div>
-			<div class="container_12">
-				<div class="grid_12">
-					<h1>
-                        <Link to="/">Home</Link>
-                    </h1>
-					<div class="menu_block">
-						<nav class="horizontal-nav full-width horizontalNav-notprocessed">
-							<ul class="sf-menu">
-								<li>
-									<a href="index.html">Home</a>
-									<ul>
-										<li><a href="#">history</a></li>
-										<li><a href="#">offers</a></li>
-										<li>
-											<a href="#">news</a>
-											<ul>
-												<li><a href="#">fresh </a></li>
-												<li><a href="#">archive</a></li>
-											</ul>
-										</li>
-									</ul> 
-								</li>
-								<li class="current"><a href="index-1.html">Videos </a></li>
-								<li><a href="index-2.html">Campaigns</a></li>
-								<li><a href="index-3.html">Volunteer </a></li>
-								<li><a href="index-4.html">Contacts</a></li>
-							</ul>
-						</nav>
-						<div class="clear"></div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
+        <div className="header">			
+            
+            <Navbar bg="dark" variant="dark">
+				<Navbar.Brand><Link className="myLink" to="/">HSE</Link></Navbar.Brand>
+				<Nav className="mr-auto">
+				<Nav.Link><Link className="myLink" to="/private">Private</Link></Nav.Link>
+				<Nav.Link>
+				{loggedInUser.isLoggedIn ? <Link className="myLink" onClick={handleLogOut}>Logout</Link> : <Link className="myLink" to='/login'>Login</Link>}
+				</Nav.Link>
+				</Nav>
+				<Form inline>
+					<FormControl type="text" placeholder="Search" className="mr-sm-2" />
+					<Button variant="outline-info">Search</Button>
+				</Form>
+			</Navbar>
 		</div>
     );
 };
